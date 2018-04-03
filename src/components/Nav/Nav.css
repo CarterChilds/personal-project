@@ -1,14 +1,85 @@
+.body{
+    background: red;
+}
+
+
 .primaryNav {
     height: 50px;
     width: 100vw;
     background-color: #212124;
     display: flex;
+    justify-content: flex-start;    
+    align-items: center;
+
+
+
+}
+/* 
+.login {
+    display: flex;
+    color: red;
+} */
+
+.photostream {
+    color: white;
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.you {
+    display: flex;
+    color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-left: 40px;
+    
+}
+
+.create {
+    display: flex;
+    color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+
+
+
+.search{
+  margin-left: 1240px;
+    
+}
+
+.search-child {
+    height: 33px;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #f3f5f6;
+    background-image: url('https://www.w3schools.com/css/searchicon.png');
+    background-position: 10px 10px;
+    padding-left: 30px;
+    background-repeat: no-repeat;
+
 
 }
 
+
 .login {
-    display: flex;
-    justify-content: center;
-    color: red;
+    
+    color: white;
+    padding-left: 20px
+}
+
+.logo-container{
+    flex: display;
+    justifiy-content: center;
+    
+    
+}
+
+.logo {
+    height: 65px;
+    width: 90px
     
 }
