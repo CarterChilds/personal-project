@@ -1,0 +1,14 @@
+.primaryNav {
+    height: 50px;
+    width: 100vw;
+    background-color: #212124;
+    display: flex;
+
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    color: red;
+    
+}
