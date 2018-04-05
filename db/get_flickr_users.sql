@@ -1,0 +1,1 @@
+select * from flickr_users
