@@ -1,3 +1,6 @@
+require('dotenv').config()
+var stripe = require("stripe")(process.env.SECRET_KEY_STRIPE)
+
 module.exports = {
     getUser: (req, res) => {
         let dataBase = req.app.get('db');
@@ -21,11 +24,21 @@ getPosts: (req, res) => {
     });
 },
 
-// getPhotos: flickr.photos.search({
-//     text: 'panda',
-//     page: 1,
-//     per_page: 100
-//   }, function(err, result) {
-  
-//   })
+payment: (req, res, next) => {
+    console.log(req.body.amount)
+    const charge = stripe.charges.create({
+        amount: req.body.amount,
+        currency:"usd",
+        source: req.body.token.id,
+        description: 'Test charge from Flickr App'
+
+    }, function(err, charge){
+        if (err) {
+            return res.sendStatus(500)
+        } else {
+            res.sendStatus(200)
+        }
+    })
+}
+
 }

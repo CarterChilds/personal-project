@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
         }
     }
     componentDidMount(){
-        axios.get('/test/puppy')
+        axios.get('/test/sky')
         .then((res) => {
             this.setState({
                 images: res.data.photos.photo

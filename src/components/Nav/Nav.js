@@ -13,11 +13,13 @@ export default function Nav (){
             <Link to='/profile'><span className='you'>You</span></Link>
             <Link to='/dashboard'><span className='photostream'>Photostream</span></Link>
             <Link to='/upload'><span className='create'>Create</span></Link>
+            <Link to='/donate'><span className='donate'>Donate</span></Link>
             <div className='subNav'>
               <a className='login' href='http://localhost:8181/auth'>Login</a>
             <span className='search'>
                 <input className='search-child' type='text' placeholder='Search'/>
             </span>
+            
 
             </div>
         </div>

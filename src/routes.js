@@ -4,6 +4,7 @@ import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
 import Upload from './components/Upload/Upload';
 import Dashboard from './components/Dashboard/Dashboard';
+import Donate from './components/Donate/Donate'
 import Login from './components/Login/Login';
 import React from 'react'
 
@@ -14,5 +15,6 @@ export default (
         <Route path = '/profile' component={Profile}/>
         <Route path = '/upload' component={Upload}/>
         <Route path = '/dashboard' component={Dashboard}/>
+        <Route path = '/donate' component={Donate}/>
     </Switch>
 )

@@ -5,7 +5,7 @@
     width: 100vw;
     background-color: #212124;
     display: flex;
-    justify-content: flex-start;    
+    justify-content: space-around;    
     align-items: center;
 }
 
@@ -32,6 +32,10 @@
     padding-right: 20px;
     padding-left: 20px;
 }
+.donate {
+    display: flex;
+    color: white;
+}
 
 
 .subNav {
@@ -43,6 +47,8 @@
 
 .login {
     display: flex;
+    color: white;
+    padding: 30px;
 
 }
 
