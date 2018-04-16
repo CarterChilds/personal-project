@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import Gallery from 'react-photo-gallery';
+import _ from 'lodash'
+import './Dashboard.css'
+
 
 
 export default class Dashboard extends Component {
@@ -12,7 +15,7 @@ export default class Dashboard extends Component {
         }
     }
     componentDidMount(){
-        axios.get('/test/sky')
+        axios.get('/test/mountains')
         .then((res) => {
             this.setState({
                 images: res.data.photos.photo
@@ -33,7 +36,7 @@ export default class Dashboard extends Component {
             )
         })
         return(
-            <div>
+            <div className='dash'>
 
                 <Gallery columns ={4} photos={imagesToDisplay}/>
             </div>

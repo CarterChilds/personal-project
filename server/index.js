@@ -1,4 +1,4 @@
-// publish key: pk_test_KCIiNtKjBsaAI7cQYiyE78UL
+ // publish key: pk_test_KCIiNtKjBsaAI7cQYiyE78UL
 //secret key: sk_test_kAXWLaw1rK2pTNjo8wNkFUaj
 
 require('dotenv').config()
@@ -12,6 +12,7 @@ const express = require('express')
     , cors = require('cors')
     , stripe = require('stripe')(process.env.SECRET_KEY_STRIPE)
 
+    const app = express();
 
 
     var Flickr = require("flickrapi"),
@@ -19,17 +20,23 @@ const express = require('express')
 
 flickrOptions = {
     api_key: '191b748b6b2523a0054952cd7877d624',
-    secret: '4ea384da6712ecbf'
+    secret: '4ea384da6712ecbf',
+    user_id: process.env.USER_ID,
+    access_token: process.env.ACCESS_TOKEN,
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET
 
   };
 
 Flickr.authenticate(flickrOptions, function(error, flickr) {
     console.log('i made it')
     app.set('flickr', flickr)
-});
-    console.log('i exist')
+        
+        
+        
+    });
     
-
+    
+    
     
     const { 
         SERVER_PORT, 
@@ -42,10 +49,13 @@ Flickr.authenticate(flickrOptions, function(error, flickr) {
         API_SECRET
     } = process.env;
     
-    const app = express();
-
-    massive(process.env.CONNECTION_STRING).then(db => app.set('db', db));
-
+    
+    massive(process.env.CONNECTION_STRING).then(db => {
+        app.set('db', db)
+        // console.log("database connected")
+        app.listen(SERVER_PORT, () => console.log( 'Listening on port: ' + SERVER_PORT ))
+    } )
+    
 app.use(bodyParser.json());
 app.use(cors())
 
@@ -65,41 +75,43 @@ passport.use(new Auth0Strategy({
     callbackURL: CALLBACK_URL,
     scope: 'openid profile'
 }, function(accessToken, refreshToken, extraParams, profile, done){
-    console.log('profile', profile)
    const db = app.get('db');
    db.find_user([profile.id]).then( userResult => {
         if(!userResult[0]){
+            console.log("creating new user")
             db.create_user([
-                profile.username,
+                profile.displayName,
                 profile.id,
-                profile.profile_picture
+                profile.picture
             ]).then( createdUser => {
-                return done(null, createdUser[0].id)
+                return done(null, createdUser[0].auth_id)
             })
         } else {
-            return done(null, userResult[0].id)
+            
+            return done(null, userResult[0].auth_id)
         }
    })
 }))
 
-passport.serializeUser( (profile, done) => {
-    console.log('serialized user')
-    done(null, profile)
+passport.serializeUser( (id, done) => {
+    done(null, id)
 } )
 
-passport.deserializeUser( (profile, done) => {
-    done(null, profile)
+passport.deserializeUser( (id, done) => {
+    app.get('db').find_user([id])
+    .then((user) => {
+        done(null, user[0])
+    })
 } )
 
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000'
+    successRedirect: 'http://localhost:3000/#/profile'
 }))
 
 app.get('/api/users', controller.getUser)
 app.get('/api/posts', controller.getPosts)
 
-//flickr api
 
 app.get('/test/:tag', (req, res) => {
     req.app.get('flickr').photos.search({
@@ -111,6 +123,16 @@ app.get('/test/:tag', (req, res) => {
       });
 })
 
+app.get('/api/user', function(req, res) {
+    if(req.user) {
+        res.status(200).send(req.user)
+    } else {
+        res.status(401).send('nice try suckaaaaaa')
+    }
+} )
+
+
+
 app.post('/api/payment', controller.payment)
 
 
@@ -118,4 +140,3 @@ app.post('/api/payment', controller.payment)
 
 
 
-app.listen(SERVER_PORT, () => console.log( 'Listening on port: ' + SERVER_PORT ))

@@ -12,8 +12,7 @@ export default class Upload extends Component {
     }
 
     handleDonation(e) {
-        this.setState({amount: e})
-        console.log(e)
+        this.setState({amount: e}) 
     }
 
 
@@ -24,7 +23,7 @@ export default class Upload extends Component {
                 Please enter an amount to donate:
             </div>
             <div className='donate'>
-                <input placeholder="Amount to Donate" onChange={(e) => this.handleDonation(e.target.value)}/>
+                <input placeholder="Amount to Donate" min='1' max ='10000' onChange={(e) => this.handleDonation(e.target.value)}/>
                 <Checkout
                 amount={+this.state.amount * 100}
                 />

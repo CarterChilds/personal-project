@@ -2,8 +2,10 @@ import React from 'react';
 import './Nav.css';
 import flickrLogo from './flickrLogo.svg'
 import {Link} from 'react-router-dom';
-
+import Dashboard from './../Dashboard/Dashboard';
+import _ from 'lodash'
 export default function Nav (){
+
     return(
         <div className='Nav'>
             <div className='primaryNav'>
@@ -17,7 +19,8 @@ export default function Nav (){
             <div className='subNav'>
               <a className='login' href='http://localhost:8181/auth'>Login</a>
             <span className='search'>
-                <input className='search-child' type='text' placeholder='Search'/>
+                <input onChange={(e) => e.target.value(e) } className='search-child' type='search' placeholder='Search'/>
+              
             </span>
             
 
