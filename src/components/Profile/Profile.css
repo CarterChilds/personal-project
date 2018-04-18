@@ -1,0 +1,14 @@
+.profile {
+    background-color: grey;
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.profile_pic {
+height: 190px;
+}
+
+.username {
+    margin: auto;
+}

@@ -14,9 +14,11 @@ module.exports = {
 
 
 
+
+
 getPosts: (req, res) => {
     let dataBase = req.app.get('db');
-    dataBase.get_flickr_posts()
+    dataBase.get_flickr_posts(req.params.id)
     .then( (posts) => res.status(200).send(posts) )
     .catch( (err) => {
      console.log(err)
@@ -39,6 +41,11 @@ payment: (req, res, next) => {
             res.sendStatus(200)
         }
     })
+},
+
+deletePosts: (req, res) => {
+    let db = req.app.get('db')
+    db.delete_post(user_id)
 }
 
 }

@@ -1,54 +1,65 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import axios from 'axios'
 import './Upload.css'
 
- export default class Upload extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        file: '',
-        imagePreviewUrl: ''
-      };
-      this.handleImageChange = this.handleImageChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+function sendToback(photo){
+    console.log(photo)
+    return axios.post('/api/photoUpload', photo)
+}
+
+function deletePost(post){
+    axios.delete('/api/deletepost', post)
+}
+
+export default class Upload extends Component {
+    constructor(){
+        super()
+
+        this.state={
+            file: '',
+            filename: '',
+            filetype: ''
+        }
+        this.handlePhoto=this.handlePhoto.bind(this)
+        this.sendPhoto=this.sendPhoto.bind(this)
     }
-  
-    handleSubmit(e) {
-      e.preventDefault();
-    
+
+    handlePhoto(event){
+        const reader = new FileReader()
+            , file = event.target.files[0]
+            , _this = this
+        
+        reader.onload = photo => {
+            this.setState({
+                file: photo.target.result,
+                filename: file.name,
+                filetype: file.type
+            })
+        }
+        reader.readAsDataURL(file)
     }
-  
-    handleImageChange(e) {
-      e.preventDefault();
-  
-      let reader = new FileReader();
-      let file = e.target.files[0];
-  
-      reader.onloadend = () => {
-        this.setState({
-          file: file,
-          imagePreviewUrl: reader.result
-        });
-      }
-  
-      reader.readAsDataURL(file)
+
+    sendPhoto(event){
+        event.preventDefault()
+
+        sendToback(this.state).then(response => {
+            console.log(response.data)
+        })
     }
-  
-    render() {
-      let {imagePreviewUrl} = this.state;
-      let $imagePreview = null;
-      if (imagePreviewUrl) {
-        $imagePreview = (<img src={imagePreviewUrl} />);
-      }
-  
-      return (
-        <div className='uploadBody'>
-          <form className='uploader' onSubmit={this._handleSubmit}>
-            <input className='fileSelect' type="file" onChange={this.handleImageChange} />
-            <button className='submit' type="submit" onClick={this.handleSubmit}>Upload Image</button>
-          </form>
-          {$imagePreview}
-        </div>
-      )
+
+    render(){
+        this.state.file && console.log(this.state.photo)
+        return (
+            <div className="FileUpload">
+                <input type="file" onChange={this.handlePhoto}/>
+                <br/>
+                {
+                this.state.file &&
+                <img src={this.state.file} alt="" className="file-preview"/>  
+                }
+                <button className='button'  onClick={this.sendPhoto}>Upload</button>
+                
+            </div>
+        )
     }
-  
-  }
+}

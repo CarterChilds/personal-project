@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
         }
     }
     componentDidMount(){
-        axios.get('/test/mountains')
+        axios.get('/test/mountain')
         .then((res) => {
             this.setState({
                 images: res.data.photos.photo
@@ -38,7 +38,7 @@ export default class Dashboard extends Component {
         return(
             <div className='dash'>
 
-                <Gallery columns ={4} photos={imagesToDisplay}/>
+                <Gallery columns ={5} photos={imagesToDisplay}/>
             </div>
         )
     }

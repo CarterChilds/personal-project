@@ -11,7 +11,10 @@ const express = require('express')
     , bodyParser = require('body-parser')
     , cors = require('cors')
     , stripe = require('stripe')(process.env.SECRET_KEY_STRIPE)
+    , S3 = require('./S3.js')
 
+    
+    
     const app = express();
 
 
@@ -19,8 +22,8 @@ const express = require('express')
 
 
 flickrOptions = {
-    api_key: '191b748b6b2523a0054952cd7877d624',
-    secret: '4ea384da6712ecbf',
+    api_key: process.env.API_KEY,
+    secret: process.env.API_SECRET,
     user_id: process.env.USER_ID,
     access_token: process.env.ACCESS_TOKEN,
     access_token_secret: process.env.ACCESS_TOKEN_SECRET
@@ -56,7 +59,8 @@ Flickr.authenticate(flickrOptions, function(error, flickr) {
         app.listen(SERVER_PORT, () => console.log( 'Listening on port: ' + SERVER_PORT ))
     } )
     
-app.use(bodyParser.json());
+    app.use(bodyParser.json({limit: '50mb'}));
+    app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cors())
 
 
@@ -65,6 +69,15 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use('/s3', require('react-s3-uploader/s3router')({
+    bucket: "flickercarter",
+    region: 'us-west-2', //optional
+    signatureVersion: 'v4', //optional (use for some amazon regions: frankfurt and others)
+    headers: {'Access-Control-Allow-Origin': '*'}, // optional
+    ACL: 'private', // this is default
+    uniquePrefix: true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -84,21 +97,25 @@ passport.use(new Auth0Strategy({
                 profile.id,
                 profile.picture
             ]).then( createdUser => {
-                return done(null, createdUser[0].auth_id)
+                return done(null, createdUser[0])
             })
         } else {
             
-            return done(null, userResult[0].auth_id)
+            return done(null, userResult[0])
         }
    })
 }))
 
-passport.serializeUser( (id, done) => {
-    done(null, id)
+
+S3(app)
+
+
+passport.serializeUser( (user, done) => {
+    done(null, user)
 } )
 
-passport.deserializeUser( (id, done) => {
-    app.get('db').find_user([id])
+passport.deserializeUser( (user, done) => {
+    app.get('db').find_user([user.auth_id])
     .then((user) => {
         done(null, user[0])
     })
@@ -110,7 +127,8 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }))
 
 app.get('/api/users', controller.getUser)
-app.get('/api/posts', controller.getPosts)
+app.get('/api/posts/:id', controller.getPosts)
+
 
 
 app.get('/test/:tag', (req, res) => {
@@ -134,6 +152,9 @@ app.get('/api/user', function(req, res) {
 
 
 app.post('/api/payment', controller.payment)
+
+app.delete('/api/deletepost', controller.deletePosts)
+
 
 
 

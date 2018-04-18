@@ -1,0 +1,16 @@
+.loginscreen {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    margin: auto;
+    padding-top: 30px;
+    
+}
+
+.loginbody{
+    height: 100vh;
+    width: 100vw;
+    background-color: gray;
+}
