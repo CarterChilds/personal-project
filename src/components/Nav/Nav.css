@@ -53,7 +53,8 @@
 }
 
 .search {
-    display: flex
+    display: flex;
+    margin-left: 250px
 }
 
 

@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
         }
     }
     componentDidMount(){
-        axios.get('/test/mountain')
+        axios.get('/test/landscape')
         .then((res) => {
             this.setState({
                 images: res.data.photos.photo

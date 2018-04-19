@@ -5,7 +5,9 @@
     align-items: center;
     font-size: 45px;
     margin: auto;
-    padding-top: 30px;
+    padding-bottom: 100px;
+    padding-right: 200px
+
     
 }
 
@@ -13,4 +15,12 @@
     height: 100vh;
     width: 100vw;
     background-color: gray;
+    box-shadow: inset 0 0 10em 3em #373737;
+    display: flex;
+
+}
+
+.logo {
+    display: flex;
+    width: 200px
 }
