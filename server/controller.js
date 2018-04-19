@@ -43,11 +43,13 @@ payment: (req, res, next) => {
     })
 },
 
-deletePost: (req, res) => {
+deletePost: (req, res, next) => {
     let db = req.app.get('db')
     db.delete_post([req.params.id])
     .then(() => {
-        db.get_flickr_posts([req.params.id]).then((result) => {
+        console.log('id: ',req.session.passport.user.user_id)
+        db.get_flickr_posts([req.session.passport.user.user_id]).then((result) => {
+            console.log('sending result: ',result)
             res.send(result)
         } )
     }

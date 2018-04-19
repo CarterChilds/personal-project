@@ -55,7 +55,7 @@ export default class Profile extends Component {
         
         axios.delete(`/api/deletepost/${id}`)
         .then((res) => {
-            console.log(res.data)
+            console.log('not deleted posts: ',res.data)
             this.setState({
                 user_posts: res.data
             })
