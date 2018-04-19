@@ -51,13 +51,13 @@ export default class Upload extends Component {
         this.state.file && console.log(this.state.photo)
         return (
             <div className="FileUpload">
-                <input type="file" onChange={this.handlePhoto}/>
+                <input className='file-button' type="file" onChange={this.handlePhoto}/>
                 <br/>
+                <button className='button'  onClick={this.sendPhoto}>Upload</button>
                 {
                 this.state.file &&
                 <img src={this.state.file} alt="" className="file-preview"/>  
                 }
-                <button className='button'  onClick={this.sendPhoto}>Upload</button>
                 
             </div>
         )

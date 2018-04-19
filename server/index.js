@@ -1,5 +1,3 @@
- // publish key: pk_test_KCIiNtKjBsaAI7cQYiyE78UL
-//secret key: sk_test_kAXWLaw1rK2pTNjo8wNkFUaj
 
 require('dotenv').config()
 const express = require('express')
@@ -64,6 +62,9 @@ Flickr.authenticate(flickrOptions, function(error, flickr) {
 app.use(cors())
 
 
+app.use( express.static( `${__dirname}/../build` ) );
+
+
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -123,11 +124,13 @@ passport.deserializeUser( (user, done) => {
 
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/#/profile'
+    successRedirect: process.env.SUCCESS_REDIRECT
+   
 }))
 
 app.get('/api/users', controller.getUser)
 app.get('/api/posts/:id', controller.getPosts)
+app.delete('/api/deletepost/:id', controller.deletePost)
 
 
 
@@ -153,7 +156,6 @@ app.get('/api/user', function(req, res) {
 
 app.post('/api/payment', controller.payment)
 
-app.delete('/api/deletepost', controller.deletePosts)
 
 
 

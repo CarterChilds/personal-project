@@ -11,4 +11,18 @@
 .button {
     height: 20px;
     width: 55px;
+    /* background-color: rgb(48, 47, 47); */
+    /* color: white; */
+}
+
+.file-preview {
+    height: 400px;
+    
+}
+
+.file-button {
+    /* background-color: rgb(48, 47, 47); */
+    /* color: white; */
+    height: 20px;
+    width: 300px
 }

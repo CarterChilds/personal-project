@@ -13,7 +13,9 @@ export default class Profile extends Component {
             username: '',
             user_picture: '',
             user_posts: [], 
-            user_id: ''
+            user_id: '',
+            
+            
 
         }
     }
@@ -26,36 +28,50 @@ export default class Profile extends Component {
                 
                 username: res.data.username,
                 user_picture: res.data.profile_picture,
-                user_id: res.data.user_id
+                user_id: res.data.user_id,
 
             })
         } ).then(() => {
             this.getPosts()
         })
     }
+    
 
 
     getPosts(){
-        console.log(this.state.user_id)
         axios.get(`/api/posts/${this.state.user_id}`)
         
         .then((res) => {
             console.log(res.data)
             this.setState({
-                user_posts: res.data
+                user_posts: res.data,
+           
             })
          
         } )
+    }
+    
+    deletePost(id){
+        
+        axios.delete(`/api/deletepost/${id}`)
+        .then((res) => {
+            console.log(res.data)
+            this.setState({
+                user_posts: res.data
+            })
+        } )
+
     }
 
     render(){
         const username = this.state.username
         const userPicture = this.state.user_picture
         const posts = this.state.user_posts.map((element, index) => {
+            console.log(element)
             return(
              
                 {
-                    src: `${element.image}`, width: 2, height: 2
+                    src: `${element.image}`, width: 1, height: 1, id: element.id
                 }
             )
         })
@@ -68,9 +84,20 @@ export default class Profile extends Component {
                 <h2 className='username'>
                 {username}
                 </h2>
+
+     
             
                 <img className='profile_pic' src={userPicture}/>
-                <Gallery columns={4} photos={posts} onClick={console.log('hi')}/>
+
+                <h2 className='posts'> 
+                    Posts:
+                </h2>
+                <Gallery  columns={3} photos={posts} onClick={e=>
+
+                    {
+                        console.log('e---->',e.target)
+                        this.deletePost(e.target.id)
+                        }} />
                 
             </div>
         )

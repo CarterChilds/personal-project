@@ -1,2 +1,3 @@
 delete from flickr_posts
-where user_id = $1
+where id = $1
+returning *;

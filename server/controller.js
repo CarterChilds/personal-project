@@ -43,9 +43,15 @@ payment: (req, res, next) => {
     })
 },
 
-deletePosts: (req, res) => {
+deletePost: (req, res) => {
     let db = req.app.get('db')
-    db.delete_post(user_id)
+    db.delete_post([req.params.id])
+    .then(() => {
+        db.get_flickr_posts([req.params.id]).then((result) => {
+            res.send(result)
+        } )
+    }
+    )} 
 }
 
-}
+

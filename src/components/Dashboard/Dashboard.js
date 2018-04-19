@@ -38,7 +38,7 @@ export default class Dashboard extends Component {
         return(
             <div className='dash'>
 
-                <Gallery columns ={5} photos={imagesToDisplay}/>
+                <Gallery columns ={4} photos={imagesToDisplay}/>
             </div>
         )
     }

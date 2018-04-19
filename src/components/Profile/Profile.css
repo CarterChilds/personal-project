@@ -1,14 +1,23 @@
 .profile {
     background-color: grey;
-    height: 100vh;
+    height: 200vh;
     width: 100vw;
 
 }
 
 .profile_pic {
 height: 190px;
+border-radius: 50%;
+padding-top: 20px;
+padding-left: 25px;
 }
 
 .username {
     margin: auto;
+    padding-left: 35px;
 }
+
+.posts {
+    padding-left: 35px;
+}
+

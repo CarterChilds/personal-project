@@ -17,7 +17,7 @@ export default function Nav (){
             <Link to='/upload'><span className='create'>Create</span></Link>
             <Link to='/donate'><span className='donate'>Donate</span></Link>
             <div className='subNav'>
-              <a className='login' href='http://localhost:8181/auth'>Login</a>
+              <a className='login' href={ process.env.REACT_APP_LOGIN }>Login</a>
             <span className='search'>
                 <input onChange={(e) => e.target.value(e) } className='search-child' type='search' placeholder='Search'/>
               
