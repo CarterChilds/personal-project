@@ -131,7 +131,8 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 app.get('/api/users', controller.getUser)
 app.get('/api/posts/:id', controller.getPosts)
 app.delete('/api/deletepost/:id', controller.deletePost)
-
+app.put('/api/updatebio', controller.updateBio)
+app.get('/api/getbio/:id', controller.getBio)
 
 
 app.get('/test/:tag', (req, res) => {

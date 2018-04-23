@@ -14,6 +14,8 @@ export default class Profile extends Component {
             user_picture: '',
             user_posts: [], 
             user_id: '',
+            input:'',
+            bio: ''
             
             
 
@@ -33,6 +35,8 @@ export default class Profile extends Component {
             })
         } ).then(() => {
             this.getPosts()
+        }).then(() => {
+            this.getBio()
         })
     }
     
@@ -51,6 +55,19 @@ export default class Profile extends Component {
         } )
     }
     
+
+    getBio(){
+        axios.get(`/api/getbio/${this.state.user_id}`)
+        .then((res) => {
+            console.log(res.data)
+            this.setState({
+                bio: res.data
+            })
+
+        } )
+    }
+
+
     deletePost(id){
         
         axios.delete(`/api/deletepost/${id}`)
@@ -63,11 +80,29 @@ export default class Profile extends Component {
 
     }
 
+
+    handleBioChange(value){
+        this.setState({
+            input: value
+        })
+    }
+
+    handleBioUpdate(input){
+        axios.put('/api/updatebio', {bio: input})
+        this.setState({
+            bio: this.state.input,
+        
+        })
+
+    }
+
+ 
+
     render(){
         const username = this.state.username
         const userPicture = this.state.user_picture
         const posts = this.state.user_posts.map((element, index) => {
-            console.log(element)
+            
             return(
              
                 {
@@ -89,8 +124,24 @@ export default class Profile extends Component {
             
                 <img className='profile_pic' src={userPicture}/>
 
+
+               
+                 <textarea className='bioInput' placeholder='Bio'onChange={ (e) => this.handleBioChange( e.target.value ) }/><br/>
+                <button className='bioButton' onClick={(e) => this.handleBioUpdate(this.state.input) }>Submit</button> <br/>
+
+
+           
+
+
+                
+
+
+                <p className='bio'>{this.state.bio}</p>
+
                 <h2 className='posts'> 
                     Posts:
+                    <p className='deleteMessage'>Click to Delete</p>
+        
                 </h2>
                 <Gallery  columns={3} photos={posts} onClick={e=>
 

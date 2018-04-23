@@ -41,6 +41,7 @@ export default class Upload extends Component {
 
     sendPhoto(event){
         event.preventDefault()
+        alert('Photo uploaded to profile')
 
         sendToback(this.state).then(response => {
             console.log(response.data)
@@ -53,7 +54,7 @@ export default class Upload extends Component {
             <div className="FileUpload">
                 <input className='file-button' type="file" onChange={this.handlePhoto}/>
                 <br/>
-                <button className='button'  onClick={this.sendPhoto}>Upload</button>
+                <button className='button'  onClick={this.sendPhoto }>Upload</button>
                 {
                 this.state.file &&
                 <img src={this.state.file} alt="" className="file-preview"/>  

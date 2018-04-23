@@ -6,8 +6,9 @@ export default function Login(){
         <div className='loginbody' >
             <img className='logo' src='https://s3.amazonaws.com/freebiesupply/large/2x/flickr-logo-black-transparent.png'/>
             <h1 className='loginscreen'>
-                Please Log In
+            <a className='loginword' href={ process.env.REACT_APP_LOGIN }>Please Login</a>
              </h1>
+
 
         </div>
     )

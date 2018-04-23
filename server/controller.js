@@ -27,7 +27,6 @@ getPosts: (req, res) => {
 },
 
 payment: (req, res, next) => {
-    console.log(req.body.amount)
     const charge = stripe.charges.create({
         amount: req.body.amount,
         currency:"usd",
@@ -47,13 +46,33 @@ deletePost: (req, res, next) => {
     let db = req.app.get('db')
     db.delete_post([req.params.id])
     .then(() => {
-        console.log('id: ',req.session.passport.user.user_id)
         db.get_flickr_posts([req.session.passport.user.user_id]).then((result) => {
-            console.log('sending result: ',result)
             res.send(result)
         } )
     }
-    )} 
+    )} ,
+
+
+ updateBio: (req, res) => {
+     let {bio} = req.body
+     let db = req.app.get('db')
+     console.log(bio)
+     db.update_bio([bio, req.session.passport.user.user_id])
+     .then((result) => {
+         res.status(200).send(result)
+     } )
+ },
+ 
+ getBio:(req, res) => {
+     let {bio} = req.body
+     let db = req.app.get('db')
+     db.get_bio([bio, req.session.passport.user.user_id])
+     .then((result) => {
+         res.status(200).send(result)
+     })
+ }
+
+
 }
 
 

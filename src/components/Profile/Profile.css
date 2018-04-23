@@ -1,6 +1,6 @@
 .profile {
     background-color: grey;
-    height: 200vh;
+    height: 300vh;
     width: 100vw;
     box-shadow: inset 0 0 10em 3em #373737;
 
@@ -22,3 +22,24 @@ padding-left: 25px;
     padding-left: 35px;
 }
 
+
+.bioButton {
+    width: 60px;
+    margin-left: 250px;
+    background-color: rgb(197, 197, 197);
+    
+}
+
+.deleteMessage {
+    font-size: 14px
+}
+
+
+.bio {
+    display: flex;
+    justify-content: center;
+}
+
+.bioInput {
+    background-color: rgb(197, 197, 197);
+}
