@@ -4,6 +4,8 @@ import axios from 'axios';
 
 
 export default class Checkout extends Component {
+    //checkput component that is being brought in to the donate component 
+    //axios post being used to post to the stripe server when user makes payment
     onToken = (token) => {
         token.card = void 0;
         axios.post('/api/payment', {token, amount: this.props.amount})

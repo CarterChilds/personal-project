@@ -55,7 +55,8 @@
 
 .search {
     display: flex;
-    margin-left: 250px
+    margin-left: 250px;
+    height:20px
 }
 
 

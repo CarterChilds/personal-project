@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Upload.css'
+import flickrLogo from './../Nav/flickrLogo.svg'
+import {Link} from 'react-router-dom';
+
 
 function sendToback(photo){
     console.log(photo)
@@ -51,15 +54,38 @@ export default class Upload extends Component {
     render(){
         this.state.file && console.log(this.state.photo)
         return (
+            <div>
+
+            <div className='Nav'>
+            <div className='primaryNav'>
+                <div className='logo-container'>
+            <img className='logo' src={flickrLogo}/>
+                </div>
+            <Link to='/profile'><span className='you'>You</span></Link>
+            <Link to='/dashboard'><span className='photostream'>Photostream</span></Link>
+            <Link to='/upload'><span className='create'>Create</span></Link>
+            <Link to='/donate'><span className='donate'>Donate</span></Link>
+            <div className='subNav'>
+              <a className='login' href={ process.env.REACT_APP_LOGIN }>Login</a>
+            <span className='search'>
+                <input className='search-child' type='search' placeholder='Search'/>
+              
+            </span>
+            
+
+            </div>
+        </div>
+        </div>
             <div className="FileUpload">
                 <input className='file-button' type="file" onChange={this.handlePhoto}/>
                 <br/>
-                <button className='button'  onClick={this.sendPhoto }>Upload</button>
+                <button className='btn-success upload-button'  onClick={this.sendPhoto }>Upload</button>
                 {
                 this.state.file &&
                 <img src={this.state.file} alt="" className="file-preview"/>  
                 }
                 
+            </div>
             </div>
         )
     }

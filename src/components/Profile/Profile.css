@@ -1,37 +1,18 @@
-.profile {
+.profile{
+    background-color: #ECECEC
+}
+.container-fluid{
     background-color: grey;
-    height: 300vh;
-    width: 100vw;
-    box-shadow: inset 0 0 10em 3em #373737;
-
 }
-
-.profile_pic {
-height: 190px;
-border-radius: 50%;
-padding-top: 20px;
-padding-left: 25px;
-}
-
-.username {
-    margin: auto;
-    padding-left: 35px;
-}
-
-.posts {
-    padding-left: 35px;
+.well, .container-fluid, span6, row-fluid{
+    background-color: red;
 }
 
 
-.bioButton {
-    width: 60px;
-    margin-left: 250px;
-    background-color: rgb(197, 197, 197);
-    
-}
 
 .deleteMessage {
-    font-size: 14px
+    font-size: 14px;
+    color: black;
 }
 
 
@@ -43,3 +24,24 @@ padding-left: 25px;
 .bioInput {
     background-color: rgb(197, 197, 197);
 }
+.img-circle {
+    border-radius: 50%;
+    height: 170px;
+}
+ h2.posts{
+     margin-left: 20px
+ }
+ .bio-input, .form-control {
+     width: 30%
+ }
+
+ #bio{
+     width: 25%;
+    height: 70px
+ }
+
+ #bio-submit{
+    background: grey;
+    border-color: grey;
+
+ }
