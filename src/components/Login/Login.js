@@ -1,15 +1,24 @@
-import React, {Component} from 'react'
-import './Login.css'
+import React, { Component } from "react";
+import "./../NewLogin.css";
 
-export default function Login(){
-    return(
-        <div className='loginbody' >
-            <img className='logo' src='https://s3.amazonaws.com/freebiesupply/large/2x/flickr-logo-black-transparent.png'/>
-            <h1 className='loginscreen'>
-            <a className='loginword' href={ process.env.REACT_APP_LOGIN }>Please Login</a>
-             </h1>
+export default function Login() {
+  return (
+    <div className='login-body'>
 
-
-        </div>
-    )
+  
+    <div class="login-page">
+      <div class="form">
+        <form class="register-form" />
+        <form class="login-form">
+          <button>
+            {" "}
+            <a className="loginword" href={process.env.REACT_APP_LOGIN}>
+               Login
+            </a>
+          </button>
+        </form>
+      </div>
+    </div>
+    </div>
+  );
 }

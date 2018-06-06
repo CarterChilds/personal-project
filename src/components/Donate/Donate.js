@@ -3,6 +3,7 @@ import Checkout from './../Checkout/Checkout'
 import './Donate.css'
 import flickrLogo from './../Nav/flickrLogo.svg'
 import {Link} from 'react-router-dom';
+import axios from 'axios'
 
 
 export default class Upload extends Component {
@@ -10,13 +11,30 @@ export default class Upload extends Component {
         super();
 
         this.state = {
-            amount: 0
+            amount: 0,
+            loggedIn: false
         }
     }
     //setting state to whatever is typed into an input box so user can decide what amount they want to donate 
     handleDonation(e) {
         this.setState({amount: e}) 
     }
+    componentWillMount() {
+        this.loggedIn()
+    }
+  
+
+    loggedIn(){
+        axios.get('/auth/me')
+        .then((res) =>{
+           this.setState({
+               loggedIn: true
+           })
+        } )
+        .catch((res) => {
+          this.props.history.push('/')
+        } )
+      }
 
 
     render(){
@@ -32,7 +50,7 @@ export default class Upload extends Component {
             <Link to='/upload'><span className='create'>Create</span></Link>
             <Link to='/donate'><span className='donate'>Donate</span></Link>
             <div className='subNav'>
-              <a className='login' href={ process.env.REACT_APP_LOGIN }>Login</a>
+            <a className='login' href='http://localhost:8181/auth/logout'>Logout</a>
             <span className='search'>
                 <input className='search-child' type='search' placeholder='Search'/>
               

@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Profile.css";
 import Gallery from "react-photo-gallery";
-import flickrLogo from './../Nav/flickrLogo.svg'
-import {Link} from 'react-router-dom';
-
+import flickrLogo from "./../Nav/flickrLogo.svg";
+import { Link } from "react-router-dom";
 
 export default class Profile extends Component {
   constructor() {
@@ -17,6 +16,7 @@ export default class Profile extends Component {
       user_id: "",
       input: "",
       bio: "",
+      bio_box: '',
       loggedIn: false
     };
   }
@@ -38,26 +38,37 @@ export default class Profile extends Component {
       })
       .then(() => {
         this.getPosts();
+        this.getBio()
       });
   }
 
   componentWillMount() {
-      this.loggedIn()
+    this.loggedIn();
   }
 
-  loggedIn(){
-    axios.get('/auth/me')
-    .then((res) =>{
-       this.setState({
-           loggedIn: true
-       })
-    } )
-    .catch((res) => {
-      this.props.history.push('/')
-    } )
+  loggedIn() {
+    axios
+      .get("/auth/me")
+      .then(res => {
+        this.setState({
+          loggedIn: true
+        });
+      })
+      .catch(res => {
+        this.props.history.push("/");
+      });
   }
 
- 
+  getBio() {
+    axios.get(`/api/getBio/${this.state.user_id}`).then(res => {
+      console.log(res.data);
+      this.setState({
+          bio: res.data[0].bio
+      })
+    });
+  }
+
+     
 
   //function grabbing user posts based on user ID
   getPosts() {
@@ -98,7 +109,7 @@ export default class Profile extends Component {
 
   2;
   render() {
-      console.log(this.state.loggedIn)
+    console.log(this.state.loggedIn);
     const username = this.state.username;
     const userPicture = this.state.user_picture;
     const posts = this.state.user_posts.map((element, index) => {
@@ -112,82 +123,92 @@ export default class Profile extends Component {
     });
 
     return (
-        <div>
-        <div className='Nav'>
-        <div className='primaryNav'>
-            <div className='logo-container'>
-        <img className='logo' src={flickrLogo}/>
+      <div>
+        <div className="Nav">
+          <div className="primaryNav">
+            <div className="logo-container">
+              <img className="logo" src={flickrLogo} />
             </div>
-        <Link to='/profile'><span className='you'>You</span></Link>
-        <Link to='/dashboard'><span className='photostream'>Photostream</span></Link>
-        <Link to='/upload'><span className='create'>Create</span></Link>
-        <Link to='/donate'><span className='donate'>Donate</span></Link>
-        <div className='subNav'>
-          <a className='login' href={ process.env.REACT_APP_LOGIN }>Login</a>
-        <span className='search'>
-            <input className='search-child' type='search' placeholder='Search'/>
-          
-        </span>
-        
+            <Link to="/profile">
+              <span className="you">You</span>
+            </Link>
+            <Link to="/dashboard">
+              <span className="photostream">Photostream</span>
+            </Link>
+            <Link to="/upload">
+              <span className="create">Create</span>
+            </Link>
+            <Link to="/donate">
+              <span className="donate">Donate</span>
+            </Link>
+            <div className="subNav">
+              <a className="login" href="http://localhost:8181/auth/logout">
+                Logout
+              </a>
 
+              <span className="search">
+                <input
+                  className="search-child"
+                  type="search"
+                  placeholder="Search"
+                />
+              </span>
+            </div>
+          </div>
         </div>
-    </div>
-    </div>
-      <div className="profile">
-        <div className="profile-section">
-          <div class="container-fluid well span6">
-            <div class="row-fluid">
-              <div class="span2">
-                <img src={userPicture} class="img-circle" />
-              </div>
+        <div className="profile">
+          <div className="profile-section">
+            <div class="container-fluid well span6">
+              <div class="row-fluid">
+                <div class="span2">
+                  <img src={userPicture} class="img-circle" />
+                </div>
 
-              <div class="span8">
-                <h3>{username}</h3>
-                <div class="form-group">
-                <label for="bio">Bio:</label>
-                <textarea class="form-control bio-input" rows="5" id="bio"></textarea>
-              </div>
-                <br />
-                <button
-                  className="bioButton btn-primary "
-                  id='bio-submit'
-                  onClick={e => this.handleBioUpdate(this.state.input)}
-                >
-                  Submit
-                </button>{" "}
-                <br />
-                {/* <h6><a href="#">More... </a></h6> */}
-              </div>
+                <div class="span8">
+                  <h3>{username}</h3>
+                  <div class="form-group">
+                    <label for="bio">Bio:</label>
+                    <textarea
+                      onChange={e => this.handleBioChange(e.target.value)}
+                      class="form-control bio-input"
+                      rows="5"
+                      id="bio"
+                    />
+                  </div>
+                  <br />
+                  <button
+                    className="bioButton btn-primary "
+                    id="bio-submit"
+                    onClick={e => this.handleBioUpdate(this.state.input)}
+                  >
+                    Submit
+                  </button>{" "}
+                  <div className="bio-box">{this.state.bio}</div>
+                  <br />
+                </div>
 
-              <div class="span2">
-                <div class="btn-group">
-                  {/* <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                                Action 
-                                <span class="icon-cog icon-white"></span><span class="caret"></span>
-                            </a> */}
-                  <ul class="dropdown-menu">
-                    {/* <li><a href="#"><span class="icon-wrench"></span> Modify</a></li> */}
-                    {/* <li><a href="#"><span class="icon-trash"></span> Delete</a></li> */}
-                  </ul>
+                <div class="span2">
+                  <div class="btn-group">
+                    <ul class="dropdown-menu" />
+                  </div>
                 </div>
               </div>
             </div>
+            <h2 className="posts">
+              Posts:
+              <p className="deleteMessage">Click to Delete</p>
+              {/* {gallery package that formats photos} */}
+            </h2>
+            <Gallery
+              columns={3}
+              photos={posts}
+              onClick={e => {
+                console.log("e---->", e.target);
+                this.deletePost(e.target.id);
+              }}
+            />
           </div>
-          <h2 className="posts">
-            Posts:
-            <p className="deleteMessage">Click to Delete</p>
-            {/* {gallery package that formats photos} */}
-          </h2>
-          <Gallery
-            columns={3}
-            photos={posts}
-            onClick={e => {
-              console.log("e---->", e.target);
-              this.deletePost(e.target.id);
-            }}
-          />
         </div>
-      </div>
       </div>
     );
   }

@@ -21,11 +21,27 @@ export default class Upload extends Component {
         this.state={
             file: '',
             filename: '',
-            filetype: ''
+            filetype: '',
+            loggedIn: false
         }
         this.handlePhoto=this.handlePhoto.bind(this)
         this.sendPhoto=this.sendPhoto.bind(this)
     }
+    componentWillMount() {
+        this.loggedIn()
+    }
+
+    loggedIn(){
+        axios.get('/auth/me')
+        .then((res) =>{
+           this.setState({
+               loggedIn: true
+           })
+        } )
+        .catch((res) => {
+          this.props.history.push('/')
+        } )
+      }
 
     handlePhoto(event){
         const reader = new FileReader()
@@ -66,7 +82,7 @@ export default class Upload extends Component {
             <Link to='/upload'><span className='create'>Create</span></Link>
             <Link to='/donate'><span className='donate'>Donate</span></Link>
             <div className='subNav'>
-              <a className='login' href={ process.env.REACT_APP_LOGIN }>Login</a>
+            <a className='login' href='http://localhost:8181/auth/logout'>Logout</a>
             <span className='search'>
                 <input className='search-child' type='search' placeholder='Search'/>
               

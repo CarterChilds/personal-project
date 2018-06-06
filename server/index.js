@@ -138,7 +138,7 @@ app.get("/auth/logout", (req, res) => {
 
   res.redirect(
     302,
-    `https://carter-childs.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost:3000/&client_id=${CLIENT_ID}`
+    `https://carter-childs.auth0.com/v2/logout?returnTo=http://localhost:3000/&client_id=${CLIENT_ID}`
   );
 });
 
@@ -147,6 +147,7 @@ app.get("/api/users", controller.getUser);
 app.get("/api/posts/:id", controller.getPosts);
 app.delete("/api/deletepost/:id", controller.deletePost);
 app.put("/api/updatebio", controller.updateBio);
+app.get('/api/getBio/:id', controller.getBio)
 
 //end point that enables photostream photos
 app.get("/test/:tag", (req, res) => {

@@ -14,14 +14,15 @@ export default class Dashboard extends Component {
         super();
 
         this.state = {
-            images: []
+            images: [],
+            loggedIn: false
         }
     }
 
     //life cycle method allowing user to see posts on page load.
     //pulling from flickr api and can change url paramater to change what users are seeing  
     componentDidMount(){
-        axios.get('/test/landscape')
+        axios.get('/test/flower')
         .then((res) => {
             this.setState({
                 images: res.data.photos.photo
@@ -29,6 +30,24 @@ export default class Dashboard extends Component {
             })
         } )
     }
+    componentWillMount() {
+        this.loggedIn()
+    }
+  
+
+    loggedIn(){
+        axios.get('/auth/me')
+        .then((res) =>{
+           this.setState({
+               loggedIn: true
+           })
+        } )
+        .catch((res) => {
+          this.props.history.push('/')
+        } )
+      }
+    
+     
     
 
 
@@ -55,7 +74,7 @@ export default class Dashboard extends Component {
             <Link to='/upload'><span className='create'>Create</span></Link>
             <Link to='/donate'><span className='donate'>Donate</span></Link>
             <div className='subNav'>
-              <a className='login' href={ process.env.REACT_APP_LOGIN }>Login</a>
+            <a className='login' href='http://localhost:8181/auth/logout'>Logout</a>
             <span className='search'>
                 <input className='search-child' type='search' placeholder='Search'/>
               

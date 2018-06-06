@@ -1,11 +1,8 @@
 .profile{
-    background-color: #ECECEC
+    background-color: grey
 }
 .container-fluid{
     background-color: grey;
-}
-.well, .container-fluid, span6, row-fluid{
-    background-color: red;
 }
 
 
@@ -32,16 +29,28 @@
      margin-left: 20px
  }
  .bio-input, .form-control {
-     width: 30%
+     width: 45%
  }
 
  #bio{
-     width: 25%;
+     width: 35%;
     height: 70px
  }
 
  #bio-submit{
     background: grey;
     border-color: grey;
+    margin-bottom: 30px
 
+ }
+
+ .bio-box{
+     display: flex;
+     justify-content: center
+ }
+
+ .well{
+width: 40%;
+background-color: #f5f5f5;
+border: 3px solid darkgrey;
  }
