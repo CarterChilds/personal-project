@@ -1,24 +1,30 @@
 import React, { Component } from "react";
-import "./../NewLogin.css";
+import "./Login.css";
 
 export default function Login() {
   return (
-    <div className='login-body'>
+    <div className="login-body" >
+      <div className="container" id="slideshow">
+        <div >
+          <div className="elemnt" />
+          <div className="elemnt1" />
+          <div className="elemnt2" />
+          <div className="elemnt3" />
 
-  
-    <div class="login-page">
-      <div class="form">
-        <form class="register-form" />
-        <form class="login-form">
-          <button>
-            {" "}
-            <a className="loginword" href={process.env.REACT_APP_LOGIN}>
-               Login
-            </a>
-          </button>
-        </form>
+          <div className="login-page">
+            <div className="form">
+              <form className="login-form">
+                <button>
+                  {" "}
+                  <a className="loginword" href={process.env.REACT_APP_LOGIN}>
+                    Login
+                  </a>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </div>
   );
 }

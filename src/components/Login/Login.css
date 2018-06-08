@@ -8,26 +8,24 @@
 .form {
   position: relative;
   z-index: 1;
-  background: #232526;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      max-width: 360px;
+  background: #232526; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #414345,
+    #232526
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #414345,
+    #232526
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.form input {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
+
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -42,75 +40,123 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
-  background: #747272;
-  color: black;
+
+.login-body {
+  background-image: url("./../images/joel-cross-391681-unsplash.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
+
+.loginword {
+  color: white;
+  height: 100%;
+  width: 100%;
 }
-.form .message a {
-  color: #4CAF50;
+
+.loginword:hover {
+  color: white;
   text-decoration: none;
 }
-.form .register-form {
-  display: none;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
 }
 .container {
+  width: 100%;
+  height: 100%;
+}
+#slideshow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
 }
-.container:before, .container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
+.elemnt,
+.elemnt1,
+.elemnt2,
+.elemnt3 {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  display: inline-block;
   text-align: center;
 }
-.container .info h1 {
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #EF3B3A;
-}
-.login-body {
-    background: #000000;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
-    background-repeat: no-repeat;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh
+.elemnt {
+  animation: xfade 16s 8s infinite;
+  background-image: url("./../images/ales-krivec-1880-unsplash.jpg");
 }
-
-.loginword{
-    color: white;
-    height: 100%;
-    width: 100%
+.elemnt1 {
+  animation: xfade 16s 6s infinite;
+  background-image: url("./../images/blake-richard-verdoorn-23459-unsplash.jpg");
 }
-
-.loginword:hover{
-    color: black;
-    text-decoration: none;
+.elemnt2 {
+  animation: xfade 16s 2s infinite;
+  background-image: url("./../images/nacho-rochon-423005-unsplash.jpg");
+}
+.elemnt3 {
+  animation: xfade 16s 0s infinite;
+  background-image: url("./../images//giammarco-boscaro-477588-unsplash.jpg");
+}
+@keyframes xfade {
+  17% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0;
+  }
+}
+@keyframes xfade1 {
+  17% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0;
+  }
+}
+@keyframes xfade2 {
+  17% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0;
+  }
+}
+@keyframes xfade3 {
+  17% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0;
+  }
 }
