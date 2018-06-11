@@ -36,7 +36,8 @@ const {
   CLIENT_SECRET,
   CALLBACK_URL,
   API_KEY,
-  API_SECRET
+  API_SECRET,
+  LOGOUT_REDIRECT
 } = process.env;
 
 //connecting database to server
@@ -138,7 +139,7 @@ app.get("/auth/logout", (req, res) => {
 
   res.redirect(
     302,
-    `https://carter-childs.auth0.com/v2/logout?returnTo=http://localhost:3000/&client_id=${CLIENT_ID}`
+    `https://carter-childs.auth0.com/v2/logout?returnTo=${LOGOUT_REDIRECT}&client_id=${CLIENT_ID}`
   );
 });
 

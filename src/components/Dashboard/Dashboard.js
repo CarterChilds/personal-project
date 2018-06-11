@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
     //life cycle method allowing user to see posts on page load.
     //pulling from flickr api and can change url paramater to change what users are seeing  
     componentDidMount(){
-        axios.get('/test/mountain')
+        axios.get('/test/landscape')
         .then((res) => {
             this.setState({
                 images: res.data.photos.photo
