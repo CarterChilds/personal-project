@@ -1,27 +1,52 @@
 .FileUpload {
-    height: 100vh;
-    width: 100vw;
-    background-color: gray;
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-    box-shadow: inset 0 0 10em 3em #373737;
-
+  height: 100vh;
+  width: 100vw;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  flex-direction: column;
+  box-shadow: inset 0 0 10em 3em #373737;
+  padding-bottom: 30px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-
 .file-preview {
-    height: 400px;
-    
+  height: 400px;
+  min-height: 400px;
+  max-height:500px;
+  min-width:400px;
+  max-width:500px;
+  
+  margin-top: 10px;
 }
 
 .file-button {
-    /* background-color: rgb(48, 47, 47); */
-    /* color: white; */
-    height: 20px;
-    width: 300px
+  /* background-color: rgb(48, 47, 47); */
+  /* color: white; */
+  height: 20px;
+  width: 300px;
 }
 
-.upload-button{
-    height: 30px
+.upload-button {
+  height: 30px;
+}
+
+.upload {
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 10em 3em #373737;
+}
+.uploaded-pic {
+  display: flex;
+  justify-content: center;
+  background: gray;
+  height: 100vh;
+  padding-top: 20px;
+  box-shadow: inset 0 0 10em 3em #373737;
+}
+.FileUpload-top {
+  display: flex;
+  justify-content: center;
 }

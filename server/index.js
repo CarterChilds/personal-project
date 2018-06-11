@@ -139,7 +139,7 @@ app.get("/auth/logout", (req, res) => {
 
   res.redirect(
     302,
-    `https://carter-childs.auth0.com/v2/logout?returnTo=${LOGOUT_REDIRECT}&client_id=${CLIENT_ID}`
+    `https://carter-childs.auth0.com/v2/logout?returnTo=http://carterchilds.org&client_id=${CLIENT_ID}`
   );
 });
 
